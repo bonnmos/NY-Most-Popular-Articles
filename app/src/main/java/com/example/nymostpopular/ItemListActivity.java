@@ -2,6 +2,7 @@ package com.example.nymostpopular;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,10 +19,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.nymostpopular.dummy.DummyContent;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -129,9 +132,15 @@ public class ItemListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mArticleTitle.setText(mArticles.get(position).title);
-            holder.mArticleAuthor.setText(mArticles.get(position).byline);
-            holder.mArticleDate.setText(mArticles.get(position).published_date);
+            Result result = mArticles.get(position);
+            holder.mArticleTitle.setText(result.title);
+            holder.mArticleAuthor.setText(result.byline);
+            holder.mArticleDate.setText(result.published_date);
+            if (result.media.size() > 0) {
+                String url = result.media.get(0).media_metadata.get(0).url;
+                Log.d("thumbnail", url);
+                Picasso.get().load(url).into(holder.mThumbnail);
+            }
 
             holder.itemView.setTag(mArticles.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);
@@ -146,12 +155,14 @@ public class ItemListActivity extends AppCompatActivity {
             final TextView mArticleTitle;
             final TextView mArticleAuthor;
             final TextView mArticleDate;
+            final ImageView mThumbnail;
 
             ViewHolder(View view) {
                 super(view);
                 mArticleTitle = view.findViewById(R.id.article_title);
                 mArticleAuthor = view.findViewById(R.id.article_author);
                 mArticleDate = view.findViewById(R.id.article_date);
+                mThumbnail = view.findViewById(R.id.article_thumbnail);
             }
         }
     }
