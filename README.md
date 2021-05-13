@@ -1,5 +1,5 @@
 # NY-Most-Popular-Articles
-NY most popular new articles
+NY most popular news articles
 
 #### HOW TO SETUP AND RUN THE CODE
 
