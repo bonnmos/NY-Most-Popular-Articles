@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NY Most Popular</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="nyt_api_key">VADRFOOxKcytqSAj9OpzLzdQPDo3x9Fn</string>
+</resources>
